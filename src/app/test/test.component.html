@@ -1,0 +1,68 @@
+<div class="container" style="width: 50%;margin-left:25%;border: 1px solid black">
+  <h1>Creat Hotel</h1>
+  <p>Please fill in this form to create an hotelaccount.</p>
+  <hr>
+<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)" >
+
+<div >
+<label for="City"><b>City</b></label>
+<input required type="text"  id="cityId" placeholder="City"  name="city" #city="ngModel"  [(ngModel)]="usermodel.city"class="form-control"/> 
+<div *ngIf="submitted&&city.errors">
+        <small style="color:red" *ngIf=" city.errors.required">city is required</small>       
+      </div>
+</div>
+<div>
+<label for="Description"><b>Description</b></label>
+<input required minlength="5" maxlength="15" type="text"  name="description" #description="ngModel" [(ngModel)]="usermodel.description" id="descriptionId" placeholder="Description" />
+<div *ngIf="submitted&&description.errors">
+        <small style="color:red" *ngIf="description.errors.required">description is required</small> 
+        <small style="color:red" *ngIf="description.errors.minlength">description is required minlength {{description.errors.minlength.requiredLength}}</small>   
+      </div>
+</div>
+<div>
+<label for="Name"><b>Name</b></label>
+<input required minlength="3" maxlength="10" #name="ngModel" type="text"  pattern="[a-zA-Z ]*" [(ngModel)]="usermodel.name" name="name" id="nameId" placeholder="Name" />
+<div *ngIf="submitted&&name.errors">
+        <small style="color:red" *ngIf="name.errors.required">name is required</small> 
+        <small style="color:red" *ngIf="name.errors.minlength">name is required minlength {{name.errors.minlength.requiredLength}}</small>
+         <small style="color:red" *ngIf="name.errors.pattern">number is not allowed </small>   
+      </div>
+</div>
+<div>
+<label for="Rating"><b>Rating</b></label>
+<input required #rating="ngModel" type="text"  [(ngModel)]="usermodel.rating" name="rating" id="ratingId" placeholder="Rating" />
+<div *ngIf="submitted&&rating.errors">
+        <small style="color:red" *ngIf="rating.errors.required">Rating is required</small>  
+      </div>
+</div>
+<div>
+<label for="Rating"><b>FromDate</b></label>
+<input required min='CurrentDate' #fromDate="ngModel" type="Date"  ngModel name="fromDate" id="fromDateId" placeholder="fromDate" />
+<div *ngIf="submitted&&fromDate.errors">
+        <small style="color:red" *ngIf="fromDate.errors.required">Rating is required</small>  
+      </div>
+</div>
+<div>
+<label for="Rating"><b>EmpName</b></label>
+<select required #empId="ngModel" type="text" name="empId" [(ngModel)]="usermodel.empId" id="empId" placeholder="empName">
+  <option value="default">I am interested in</option>
+  <option *ngFor="let emp of empList" [ngValue]="emp.id">{{emp.name}}</option>
+<div *ngIf="submitted&&empId.errors">
+        <small style="color:red" *ngIf="empId.errors.required">Rating is required</small>  
+      </div>
+</select>
+</div>
+<div>
+<label for="Rating"><b>FileUpload</b></label>
+<input  #filedata="ngModel" type="file" [(ngModel)]="usermodel.filedata" name="filedata"  id="fileUpId" placeholder="fileUp"/>
+ <!--
+<div *ngIf="submitted&&filedata.errors">
+        <small style="color:red" *ngIf="filedata.errors.required">Rating is required</small>  
+      </div> -->
+
+</div>
+{{CurrentDate | date: 'yyyy-MM-dd'}}
+<button type="submit">submit</button>
+
+</form>
+</div>
